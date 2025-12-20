@@ -9,7 +9,7 @@ class StorageService {
 
   static bool get vibration => _prefs?.getBool('vibration') ?? true;
   static bool get sound => _prefs?.getBool('sound') ?? true;
-  static int get chantCount => _prefs?.getInt('chantCount') ?? 27;
+  static int get chantCount => _prefs?.getInt('chantCount') ?? 108;
 
   static Future setVibration(bool v) async =>
       await _prefs?.setBool('vibration', v);

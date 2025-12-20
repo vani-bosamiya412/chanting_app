@@ -79,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.02),
 
-                /// Vibration card
+                // Vibration card
                 _settingsTile(
                   context,
                   icon: Icons.vibration,
@@ -97,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.02),
 
-                /// Default chant count card
+                // Default chant count card
                 Container(
                   padding: EdgeInsets.all(size.width * 0.045),
                   decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       BoxShadow(
                         color: Colors.black.withOpacity(0.05),
                         blurRadius: 8,
-                        offset: const Offset(0, 4),
+                        offset: Offset(0, 4),
                       ),
                     ],
                   ),
