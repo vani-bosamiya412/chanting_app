@@ -8,16 +8,35 @@ class QuoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        horizontal: size.width * 0.06,
+        vertical: size.height * 0.03,
+      ),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFEEC4),
-        borderRadius: BorderRadius.circular(16),
+        color: const Color(0xFFFFF1CF),
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: const TextStyle(color: AppColors.textDark),
+        style: TextStyle(
+          color: AppColors.textDark,
+          fontSize: size.width * 0.038,
+          height: 1.5,
+          fontWeight: FontWeight.w400,
+          fontStyle: FontStyle.italic,
+        ),
       ),
     );
   }

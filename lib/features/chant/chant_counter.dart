@@ -9,33 +9,60 @@ class ChantCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
+    final circleSize = size.width * 0.68;
 
     return Stack(
       alignment: Alignment.center,
       children: [
+        // Full light ring
         SizedBox(
-          height: w * 0.6,
-          width: w * 0.6,
+          height: circleSize,
+          width: circleSize,
           child: CircularProgressIndicator(
-            value: current / total,
-            strokeWidth: 8,
-            backgroundColor: AppColors.primary.withOpacity(0.2),
-            color: AppColors.primary,
+            value: 1,
+            strokeWidth: 12,
+            backgroundColor: Colors.transparent,
+            valueColor: AlwaysStoppedAnimation(
+              AppColors.primary.withValues(alpha: 0.15),
+            ),
           ),
         ),
+
+        // Small orange progress arc
+        SizedBox(
+          height: circleSize,
+          width: circleSize,
+          child: CircularProgressIndicator(
+            value: current / total,
+            strokeWidth: 12,
+            backgroundColor: Colors.transparent,
+            valueColor: const AlwaysStoppedAnimation(Color(0xFFFF9800)),
+          ),
+        ),
+
+        // Counter text
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               "$current",
-              style:
-              const TextStyle(fontSize: 36, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: size.width * 0.18,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
             ),
-            Text("/ $total",
-                style: const TextStyle(color: AppColors.textLight)),
+            const SizedBox(height: 2),
+            Text(
+              "/ $total",
+              style: TextStyle(
+                fontSize: size.width * 0.05,
+                color: AppColors.textLight,
+              ),
+            ),
           ],
-        )
+        ),
       ],
     );
   }

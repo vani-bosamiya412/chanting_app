@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final padding = AppSizes.padding(context);
 
     final chants = [
@@ -48,50 +49,73 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Header
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Expanded(
-                    child: Text(
-                      "Namaste",
-                      style:
-                      TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Namaste",
+                          style: TextStyle(
+                            fontSize: size.width * 0.075,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          "Welcome back to peace",
+                          style: TextStyle(color: AppColors.textLight, fontSize: size.width * 0.045),
+                        ),
+                      ],
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.settings),
+                    icon: Icon(Icons.settings, color: Colors.black, size: size.width * 0.065),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const SettingsScreen()),
+                          builder: (_) => const SettingsScreen(),
+                        ),
                       );
                     },
-                  )
+                  ),
                 ],
               ),
-              const Text("Welcome back to peace",
-                  style: TextStyle(color: AppColors.textLight)),
-              const SizedBox(height: 20),
-              const Text("Choose Your Chant",
-                  style: TextStyle(fontWeight: FontWeight.w600)),
-              const SizedBox(height: 12),
+
+              SizedBox(height: size.height * 0.035),
+
+              // Section title
+              Text(
+                "Choose Your Chant",
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: size.width * 0.050),
+              ),
+
+              SizedBox(height: size.height * 0.02),
+
+              // Chant list
               ...chants.map(
-                    (c) => ChantTile(
+                (c) => ChantTile(
                   chant: c,
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => ChantScreen(chant: c),
-                      ),
+                      MaterialPageRoute(builder: (_) => ChantScreen(chant: c)),
                     );
                   },
                 ),
               ),
-              const Spacer(),
+
+              SizedBox(height: size.height * 0.02),
+
+              // Quote card
               const QuoteCard(
                 text:
-                '"The mind is everything. What you think you become."\n— Buddha',
+                    '"The mind is everything. What you think you become."\n— Buddha',
               ),
             ],
           ),
