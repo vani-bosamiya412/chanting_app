@@ -6,7 +6,7 @@ class AppTheme {
     useMaterial3: true,
     fontFamily: 'Poppins',
     scaffoldBackgroundColor: AppColors.background,
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       bodyMedium: TextStyle(color: AppColors.textDark),
     ),
   );

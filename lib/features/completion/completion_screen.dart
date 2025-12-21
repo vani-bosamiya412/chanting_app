@@ -15,14 +15,13 @@ class CompletionScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(gradient: AppColors.completionGradient),
+        decoration: BoxDecoration(gradient: AppColors.completionGradient),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Success icon
                 Container(
                   height: size.width * 0.28,
                   width: size.width * 0.28,
@@ -37,7 +36,7 @@ class CompletionScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.check,
                     size: 56,
                     color: AppColors.success,
@@ -46,15 +45,13 @@ class CompletionScreen extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.04),
 
-                /// Title
                 Text(
                   "Chant Completed",
                   style: TextStyle(fontSize: size.width * 0.09, fontWeight: FontWeight.w600),
                 ),
 
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
 
-                /// Subtitle
                 Text(
                   "Well done! You completed Om",
                   style: TextStyle(fontSize: size.width * 0.04, color: Colors.black54),
@@ -62,7 +59,6 @@ class CompletionScreen extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.04),
 
-                /// Total chants card
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(vertical: size.height * 0.035),
@@ -73,7 +69,7 @@ class CompletionScreen extends StatelessWidget {
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 10,
-                        offset: const Offset(0, 6),
+                        offset: Offset(0, 6),
                       ),
                     ],
                   ),
@@ -86,7 +82,7 @@ class CompletionScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      SizedBox(height: 6),
                       Text(
                         "Total Chants",
                         style: TextStyle(fontSize: size.width * 0.045, color: Colors.black54),
@@ -97,10 +93,9 @@ class CompletionScreen extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.03),
 
-                /// Decorative icons row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(Icons.auto_awesome, color: Colors.orange),
                     SizedBox(width: 12),
                     Icon(Icons.local_florist, color: Colors.orange),
@@ -111,7 +106,6 @@ class CompletionScreen extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.03),
 
-                /// Quote card
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(
@@ -119,7 +113,7 @@ class CompletionScreen extends StatelessWidget {
                     horizontal: size.width * 0.04,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFDFF8EA),
+                    color: Color(0xFFDFF8EA),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
@@ -131,12 +125,11 @@ class CompletionScreen extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.05),
 
-                /// Chant again button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFF9800),
+                      backgroundColor: Color(0xFFFF9800),
                       padding: EdgeInsets.symmetric(
                         vertical: size.height * 0.02,
                       ),
@@ -147,7 +140,7 @@ class CompletionScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (_) => const HomeScreen()),
+                        MaterialPageRoute(builder: (_) => HomeScreen()),
                         (_) => false,
                       );
                     },
@@ -164,7 +157,6 @@ class CompletionScreen extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.015),
 
-                // Back to home
                 SizedBox(
                   width: double.infinity,
                   child: Material(
@@ -174,7 +166,7 @@ class CompletionScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (_) => const HomeScreen()),
+                          MaterialPageRoute(builder: (_) => HomeScreen()),
                               (_) => false,
                         );
                       },
@@ -189,18 +181,18 @@ class CompletionScreen extends StatelessWidget {
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.08),
                               blurRadius: 10,
-                              offset: const Offset(0, 4),
+                              offset: Offset(0, 4),
                             ),
                           ],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.arrow_back,
                               color: Colors.black87,
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Text(
                               "Back to Home",
                               style: TextStyle(

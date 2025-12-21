@@ -29,15 +29,14 @@ class ChantTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 8,
-                offset: const Offset(0, 4),
+                offset: Offset(0, 4),
               ),
             ],
           ),
           child: Row(
             children: [
-              // Icon container
               Container(
                 height: size.width * 0.12,
                 width: size.width * 0.12,
@@ -54,7 +53,6 @@ class ChantTile extends StatelessWidget {
 
               SizedBox(width: size.width * 0.04),
 
-              // Texts
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +64,7 @@ class ChantTile extends StatelessWidget {
                         fontSize: size.width * 0.045,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       chant.subtitle,
                       style: TextStyle(
@@ -78,7 +76,7 @@ class ChantTile extends StatelessWidget {
                 ),
               ),
 
-              const Icon(Icons.chevron_right, color: Colors.black45),
+              Icon(Icons.chevron_right, color: Colors.black45),
             ],
           ),
         ),

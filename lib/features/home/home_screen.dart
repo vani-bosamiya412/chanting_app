@@ -21,24 +21,28 @@ class HomeScreen extends StatelessWidget {
         subtitle: 'Universal Peace',
         icon: Icons.auto_awesome,
         color: Colors.orange,
+        audio: 'sounds/om.mp3',
       ),
       ChantModel(
         title: 'Gayatri Mantra',
         subtitle: 'Divine Illumination',
         icon: Icons.auto_awesome,
         color: Colors.purple,
+        audio: 'sounds/gayatri.mp3',
       ),
       ChantModel(
-        title: 'Mahamrityunjaya',
-        subtitle: 'Healing & Protection',
+        title: 'Om Namah Shivay',
+        subtitle: 'Spiritual Purification',
         icon: Icons.favorite,
         color: Colors.blue,
+        audio: 'sounds/om_namah_shivay.mp3',
       ),
       ChantModel(
         title: 'Shanti Mantra',
         subtitle: 'Inner Calm',
         icon: Icons.self_improvement,
         color: Colors.green,
+        audio: 'sounds/shanti.mp3',
       ),
     ];
 
@@ -49,7 +53,6 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -65,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.black87,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           "Welcome back to peace",
                           style: TextStyle(color: AppColors.textLight, fontSize: size.width * 0.045),
@@ -79,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const SettingsScreen(),
+                          builder: (_) => SettingsScreen(),
                         ),
                       );
                     },
@@ -89,7 +92,6 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: size.height * 0.035),
 
-              // Section title
               Text(
                 "Choose Your Chant",
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: size.width * 0.050),
@@ -97,7 +99,6 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: size.height * 0.02),
 
-              // Chant list
               ...chants.map(
                 (c) => ChantTile(
                   chant: c,
@@ -112,8 +113,7 @@ class HomeScreen extends StatelessWidget {
 
               SizedBox(height: size.height * 0.02),
 
-              // Quote card
-              const QuoteCard(
+              QuoteCard(
                 text:
                     '"The mind is everything. What you think you become."\n— Buddha',
               ),

@@ -18,7 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
     sound = StorageService.sound;
     vibration = StorageService.vibration;
-    chantCount = StorageService.chantCount; // default = 108
+    chantCount = StorageService.chantCount;
   }
 
   @override
@@ -28,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -41,14 +41,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// Header
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back),
+                      icon: Icon(Icons.arrow_back),
                       onPressed: () => Navigator.pop(context),
                     ),
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6),
                     Text(
                       "Settings",
                       style: TextStyle(
@@ -61,7 +60,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.03),
 
-                /// Sound card
                 _settingsTile(
                   context,
                   icon: Icons.volume_up,
@@ -79,7 +77,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.02),
 
-                // Vibration card
                 _settingsTile(
                   context,
                   icon: Icons.vibration,
@@ -97,7 +94,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.02),
 
-                // Default chant count card
                 Container(
                   padding: EdgeInsets.all(size.width * 0.045),
                   decoration: BoxDecoration(
@@ -105,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 8,
                         offset: Offset(0, 4),
                       ),
@@ -143,8 +139,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   ),
                                   decoration: BoxDecoration(
                                     color: isSelected
-                                        ? const Color(0xFFFF9800)
-                                        : const Color(0xFFF2F2F2),
+                                        ? Color(0xFFFF9800)
+                                        : Color(0xFFF2F2F2),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Text(
@@ -171,11 +167,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.03),
 
-                // About card
                 Container(
                   padding: EdgeInsets.all(size.width * 0.05),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFF1C9),
+                    color: Color(0xFFFFF1C9),
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: Column(
@@ -198,7 +193,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 SizedBox(height: size.height * 0.04,),
 
-                // Footer
                 Center(
                   child: Column(
                     children: [
@@ -222,7 +216,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  /// Reusable settings tile
   Widget _settingsTile(
     BuildContext context, {
     required IconData icon,
@@ -240,9 +233,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -264,10 +257,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                  style: TextStyle(fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 4),
-                Text(subtitle, style: const TextStyle(color: Colors.black54)),
+                SizedBox(height: 4),
+                Text(subtitle, style: TextStyle(color: Colors.black54)),
               ],
             ),
           ),

@@ -21,16 +21,16 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
     scale = Tween(begin: 0.7, end: 1.0).animate(
       CurvedAnimation(parent: controller, curve: Curves.easeOutBack),
     );
     controller.forward();
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => HomeScreen()),
       );
     });
   }
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: AppColors.splashGradient,
         ),
         child: SafeArea(
@@ -54,7 +54,6 @@ class _SplashScreenState extends State<SplashScreen>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Glowing circular logo
                   Container(
                     height: logoSize,
                     width: logoSize,
@@ -78,7 +77,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                   SizedBox(height: size.height * 0.035),
 
-                  // App name
                   Text(
                     AppStrings.appName,
                     style: TextStyle(
@@ -91,7 +89,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                   SizedBox(height: size.height * 0.008),
 
-                  // Tagline
                   Text(
                     AppStrings.tagline,
                     textAlign: TextAlign.center,

@@ -15,7 +15,6 @@ class ChantCounter extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        // Full light ring
         SizedBox(
           height: circleSize,
           width: circleSize,
@@ -29,7 +28,6 @@ class ChantCounter extends StatelessWidget {
           ),
         ),
 
-        // Small orange progress arc
         SizedBox(
           height: circleSize,
           width: circleSize,
@@ -37,11 +35,10 @@ class ChantCounter extends StatelessWidget {
             value: current / total,
             strokeWidth: 12,
             backgroundColor: Colors.transparent,
-            valueColor: const AlwaysStoppedAnimation(Color(0xFFFF9800)),
+            valueColor: AlwaysStoppedAnimation(Color(0xFFFF9800)),
           ),
         ),
 
-        // Counter text
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -53,7 +50,7 @@ class ChantCounter extends StatelessWidget {
                 color: Colors.black87,
               ),
             ),
-            const SizedBox(height: 2),
+            SizedBox(height: 2),
             Text(
               "/ $total",
               style: TextStyle(

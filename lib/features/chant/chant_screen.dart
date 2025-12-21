@@ -18,6 +18,8 @@ class ChantScreen extends StatefulWidget {
 class _ChantScreenState extends State<ChantScreen> {
   late int total;
   int count = 0;
+  bool isPlaying = false;
+  bool isPaused = false;
 
   @override
   void initState() {
@@ -54,9 +56,8 @@ class _ChantScreenState extends State<ChantScreen> {
         return 'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि\n'
             'धियो यो नः प्रचोदयात्';
 
-      case 'Mahamrityunjaya':
-        return 'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्\n'
-            'उर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय मामृतात्\n';
+      case 'Om Namah Shivay':
+        return 'ॐ नमः शिवाय';
 
       case 'Shanti Mantra':
         return 'ॐ शान्तिः शान्तिः शान्तिः';
@@ -66,6 +67,22 @@ class _ChantScreenState extends State<ChantScreen> {
     }
   }
 
+  void pauseChanting() async {
+    await AudioService.pause();
+    setState(() => isPaused = true);
+  }
+
+  void resumeChanting() async {
+    await AudioService.resume();
+    setState(() => isPaused = false);
+  }
+
+  @override
+  void dispose() {
+    AudioService.stop();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -73,7 +90,7 @@ class _ChantScreenState extends State<ChantScreen> {
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -85,25 +102,23 @@ class _ChantScreenState extends State<ChantScreen> {
             padding: EdgeInsets.all(padding),
             child: Column(
               children: [
-                // Top bar
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back),
+                      icon: Icon(Icons.arrow_back),
                       onPressed: () => Navigator.pop(context),
                     ),
-                    const Spacer(),
+                    Spacer(),
                     TextButton.icon(
                       onPressed: () => setState(() => count = 0),
-                      icon: const Icon(Icons.refresh, size: 18),
-                      label: const Text("Reset"),
+                      icon: Icon(Icons.refresh, size: 18),
+                      label: Text("Reset"),
                     ),
                   ],
                 ),
 
                 SizedBox(height: size.height * 0.02),
 
-                // Title
                 Text(
                   widget.chant.title,
                   style: TextStyle(
@@ -111,7 +126,7 @@ class _ChantScreenState extends State<ChantScreen> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6),
                 Text(
                   widget.chant.subtitle,
                   style: TextStyle(
@@ -122,22 +137,20 @@ class _ChantScreenState extends State<ChantScreen> {
 
                 SizedBox(height: size.height * 0.05),
 
-                // Counter
                 ChantCounter(current: count, total: total),
 
                 SizedBox(height: size.height * 0.035),
 
-                // Vibration status
                 if (StorageService.vibration)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.vibration,
                         size: 18,
                         color: Colors.black54,
                       ),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
                         "Vibration enabled",
                         style: TextStyle(
@@ -148,9 +161,52 @@ class _ChantScreenState extends State<ChantScreen> {
                     ],
                   ),
 
-                const Spacer(),
+                Spacer(),
 
-                // Increment button
+                IconButton(
+                  iconSize: size.width * 0.09,
+                  icon: Icon(
+                    isPlaying ? Icons.pause_circle : Icons.play_circle,
+                    color: Colors.black87,
+                  ),
+                  onPressed: () async {
+                    if (!isPlaying) {
+                      if (count == 0) {
+                        await AudioService.startMantra(
+                          asset: widget.chant.audio,
+                          repeatCount: total,
+                          onEachComplete: () {
+                            if (!mounted) return;
+
+                            setState(() => count++);
+
+                            if (count == total) {
+                              AudioService.playComplete();
+                              VibrationService.complete();
+
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => CompletionScreen(total: total),
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      } else {
+                        await AudioService.resume();
+                      }
+
+                      setState(() => isPlaying = true);
+                    } else {
+                      await AudioService.pause();
+                      setState(() => isPlaying = false);
+                    }
+                  },
+                ),
+
+                Spacer(),
+
                 GestureDetector(
                   onTap: increment,
                   child: Container(
@@ -158,12 +214,12 @@ class _ChantScreenState extends State<ChantScreen> {
                     height: size.width * 0.25,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: const Color(0xFFFF9800),
+                      color: Color(0xFFFF9800),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.15),
                           blurRadius: 12,
-                          offset: const Offset(0, 6),
+                          offset: Offset(0, 6),
                         ),
                       ],
                     ),
@@ -190,7 +246,6 @@ class _ChantScreenState extends State<ChantScreen> {
 
                 SizedBox(height: size.height * 0.04),
 
-                // Bottom mantra card
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(vertical: size.height * 0.022),
